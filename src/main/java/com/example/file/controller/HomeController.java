@@ -13,4 +13,9 @@ public class HomeController {
         return "home/main";
     }
 
+    @RequestMapping("/test/upload")
+    public String upload() {
+        return "home/test/upload";
+    }
+
 }

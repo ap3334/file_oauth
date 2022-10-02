@@ -61,6 +61,19 @@ public class MemberService implements UserDetailsService {
         return member;
     }
 
+    public Member join(String username, String password, String email) {
+
+        Member member = Member.builder()
+                .username(username)
+                .password(passwordEncoder.encode(password))
+                .email(email)
+                .build();
+
+        memberRepository.save(member);
+
+        return member;
+    }
+
     public Member getMemberById(Long id) {
 
         return memberRepository.findById(id).orElse(null);
@@ -77,5 +90,9 @@ public class MemberService implements UserDetailsService {
 
         return new User(member.getUsername(), member.getPassword(), authorities);
 
+    }
+
+    public long count() {
+        return memberRepository.count();
     }
 }

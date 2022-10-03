@@ -3,10 +3,12 @@ package com.example.file.home.controller;
 import com.example.file.member.entity.Member;
 import com.example.file.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 
@@ -26,4 +28,11 @@ public class HomeController {
         return "home/about";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/currentUserOrigin")
+    @ResponseBody
+    public Principal currentUserOrigin(Principal principal) {
+        return principal;
+    }
 }
+

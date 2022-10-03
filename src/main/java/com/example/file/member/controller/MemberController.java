@@ -24,12 +24,14 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/join")
     public String showJoin() {
 
         return "member/join";
     }
 
+    @PreAuthorize("isAnonymous()")
     @PostMapping("/join")
     public String join(String username, String password, String email, MultipartFile profileImg, HttpServletRequest req) {
 
@@ -62,6 +64,7 @@ public class MemberController {
 
     }
 
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
     public String showLogin() {
         return "member/login";

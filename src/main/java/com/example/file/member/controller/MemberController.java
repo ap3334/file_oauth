@@ -2,22 +2,17 @@ package com.example.file.member.controller;
 
 import com.example.file.member.entity.Member;
 import com.example.file.member.service.MemberService;
-import com.example.file.security.dto.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/member")
@@ -63,10 +58,17 @@ public class MemberController {
 
     }
 
+    @GetMapping("/profile/img/{id}")
+    public String showProfileImg(@PathVariable Long id) {
+        return "redirect:" + memberService.getMemberById(id).getProfileImgUrl();
+    }
+
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
     public String showLogin() {
         return "member/login";
     }
+
+
 
 }

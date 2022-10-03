@@ -1,5 +1,6 @@
 package com.example.file.base;
 
+import com.example.file.member.entity.Member;
 import com.example.file.member.service.MemberService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +16,11 @@ public class DevInitData {
     CommandLineRunner init(MemberService memberService, PasswordEncoder passwordEncoder) {
 
         return args -> {
-            memberService.join("user1", "1234", "user1@test.com");
-            memberService.join("user2", "1234", "user2@test.com");
+            Member member1 = memberService.join("user1", "1234", "user1@test.com");
+            memberService.setProfileImgByUrl(member1, "https://picsum.photos/200/300");
+
+            Member member2 = memberService.join("user2", "1234", "user2@test.com");
+            memberService.setProfileImgByUrl(member2, "https://picsum.photos/200/300");
         };
 
     }

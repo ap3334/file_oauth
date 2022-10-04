@@ -18,8 +18,6 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final MemberService memberService;
-
     @GetMapping("/")
     public String showMain() {
         return "home/main";

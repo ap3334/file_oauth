@@ -15,10 +15,14 @@ public class TestInitData {
     CommandLineRunner init(MemberService memberService, PasswordEncoder passwordEncoder) {
 
         return args -> {
-            memberService.join("user1", "1234", "user1@test.com");
-            memberService.join("user2", "1234", "user2@test.com");
-            memberService.join("user3", "1234", "user3@test.com");
-            memberService.join("user4", "1234", "user4@test.com");
+
+            String password = passwordEncoder.encode("1234");
+
+            memberService.join("user1", password, "user1@test.com");
+            memberService.join("user2", password, "user2@test.com");
+            memberService.join("user3", password, "user3@test.com");
+            memberService.join("user4", password, "user4@test.com");
+
         };
 
     }

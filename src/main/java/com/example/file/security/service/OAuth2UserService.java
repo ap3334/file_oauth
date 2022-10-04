@@ -3,6 +3,7 @@ package com.example.file.security.service;
 import com.example.file.member.entity.Member;
 import com.example.file.member.exception.MemberNotFoundException;
 import com.example.file.member.repository.MemberRepository;
+import com.example.file.member.service.MemberService;
 import com.example.file.security.dto.MemberContext;
 import com.example.file.security.exception.OAuthTypeMatchNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,8 @@ import java.util.*;
 public class OAuth2UserService extends DefaultOAuth2UserService {
 
     private final MemberRepository memberRepository;
+
+    private final MemberService memberService;
 
     @Override
     @Transactional
@@ -60,6 +63,8 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
                             .password("")
                             .build();
                     memberRepository.save(member);
+
+                    memberService.setProfileImgByUrl(member, "https://picsum.photos/200/300");
                 }
             }
         } else {

@@ -1,9 +1,9 @@
 package com.example.file;
 
-import com.example.file.home.controller.HomeController;
-import com.example.file.member.controller.MemberController;
-import com.example.file.member.entity.Member;
-import com.example.file.member.service.MemberService;
+import com.example.file.app.home.controller.HomeController;
+import com.example.file.app.member.controller.MemberController;
+import com.example.file.app.member.entity.Member;
+import com.example.file.app.member.service.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

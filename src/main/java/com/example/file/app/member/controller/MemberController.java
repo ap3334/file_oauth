@@ -2,12 +2,14 @@ package com.example.file.app.member.controller;
 
 import com.example.file.app.member.entity.Member;
 import com.example.file.app.member.service.MemberService;
+import com.example.file.app.security.dto.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,6 +87,20 @@ public class MemberController {
         return "member/login";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify")
+    public String showModify() {
+        return "member/modify";
+    }
 
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify")
+    public String modify(@AuthenticationPrincipal MemberContext context, String email, MultipartFile profileImg) {
+        Member member = memberService.getMemberById(context.getId());
+
+        memberService.modify(member, email, profileImg);
+
+        return "redirect:/member/profile";
+    }
 
 }

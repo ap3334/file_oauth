@@ -3,6 +3,8 @@ package com.example.file.app.article.controller;
 import com.example.file.app.article.controller.input.ArticleForm;
 import com.example.file.app.article.entity.Article;
 import com.example.file.app.article.service.ArticleService;
+import com.example.file.app.base.dto.RsData;
+import com.example.file.app.fileUpload.entity.GenFile;
 import com.example.file.app.fileUpload.service.GenFileService;
 import com.example.file.app.security.dto.MemberContext;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +51,10 @@ public class ArticleController {
 
         Article article = articleService.write(memberContext.getId(), articleForm.getSubject(), articleForm.getContent());
 
-        genFileService.saveFiles(article, fileMap);
+        RsData<Map<String, GenFile>> saveFilesRsData = genFileService.saveFiles(article, fileMap);
+
+        log.debug("saveFilesRsData : " + saveFilesRsData);
+
 
         return "작업중";
     }

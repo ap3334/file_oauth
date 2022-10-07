@@ -1,6 +1,8 @@
 package com.example.file.app.fileUpload.service;
 
 import com.example.file.app.article.entity.Article;
+import com.example.file.app.base.AppConfig;
+import com.example.file.app.base.dto.RsData;
 import com.example.file.app.fileUpload.entity.GenFile;
 import com.example.file.app.fileUpload.repository.GenFileRepository;
 import com.example.file.util.Util;
@@ -8,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -17,13 +22,19 @@ public class GenFileService {
     private final GenFileRepository genFileRepository;
 
 
-    public void saveFiles(Article article, Map<String, MultipartFile> fileMap) {
+    public RsData<Map<String, GenFile>> saveFiles(Article article, Map<String, MultipartFile> fileMap) {
 
         String relTypeCode = "article";
         long relId = article.getId();
 
+        Map<String, GenFile> genFileIds = new HashMap<>();
+
         for (String inputName : fileMap.keySet()) {
             MultipartFile multipartFile = fileMap.get(inputName);
+
+            if (multipartFile.isEmpty()) {
+                continue;
+            }
 
             String[] inputNameBits = inputName.split("__");
 
@@ -54,7 +65,23 @@ public class GenFileService {
 
             genFileRepository.save(genFile);
 
+            String filePath = AppConfig.GET_FILE_DIR_PATH + "/" + fileDir + "/" + genFile.getFileName();
+
+            File file = new File(filePath);
+
+            file.getParentFile().mkdirs();
+
+            try {
+                multipartFile.transferTo(file);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            genFileIds.put(inputName, genFile);
+
         }
+
+        return new RsData("S-1", "파일을 업로드했습니다.", genFileIds);
     }
 
 }

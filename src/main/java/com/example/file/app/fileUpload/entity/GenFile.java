@@ -17,7 +17,7 @@ public class GenFile extends BaseEntity {
 
     private String relTypeCode;
 
-    private int relId;
+    private long relId;
 
     private String typeCode;
 

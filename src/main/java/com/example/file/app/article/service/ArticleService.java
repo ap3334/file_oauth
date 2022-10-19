@@ -44,5 +44,13 @@ public class ArticleService {
         genFileService.addGenFileByUrl("article", article.getId(), typeCode, type2Code, fileNo, url);
     }
 
+    public Article getForPrintArticleById(Long id) {
+        Article article = getArticleById(id);
+
+        article.getExtra().put("age", 22);
+
+        return article;
+
+    }
 }
 

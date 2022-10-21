@@ -82,6 +82,7 @@ public class ArticleController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
+
         model.addAttribute("article", article);
 
         return "article/modify";
@@ -89,7 +90,19 @@ public class ArticleController {
 
     @PostMapping("/{id}/modify")
     public String modify(@AuthenticationPrincipal MemberContext memberContext, Model model, @PathVariable Long id, @Valid ArticleForm articleForm) {
-        return "/article/%d".formatted(id);
+
+        Article article = articleService.getForPrintArticleById(id);
+
+        if (memberContext.memberIsNot(article.getAuthor())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
+        articleService.modify(article, articleForm.getSubject(), articleForm.getContent());
+
+        String msg = Util.url.encode("%d번 게시물이 수정되었습니다.");
+
+        return "redirect:/article/%d?msg=%s".formatted(id, msg);
+
     }
 
 }

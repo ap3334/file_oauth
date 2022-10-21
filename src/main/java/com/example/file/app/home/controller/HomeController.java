@@ -1,6 +1,6 @@
 package com.example.file.app.home.controller;
 
-import com.example.file.app.security.dto.MemberContext;
+import com.example.file.app.member.repository.security.dto.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

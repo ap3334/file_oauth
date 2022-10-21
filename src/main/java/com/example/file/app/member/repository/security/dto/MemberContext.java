@@ -1,4 +1,4 @@
-package com.example.file.app.security.dto;
+package com.example.file.app.member.repository.security.dto;
 
 import com.example.file.app.member.entity.Member;
 import lombok.Getter;
@@ -59,4 +59,13 @@ public class MemberContext extends User implements OAuth2User {
     public String getProfileImgRedirectUrl() {
         return "/member/profile/img/" + getId() + "?cacheKey=" + getModifyDate().toString();
     }
+
+    public boolean memberIs(Member member) {
+        return id.equals(member.getId());
+    }
+
+    public boolean memberIsNot(Member member) {
+        return memberIs(member) == false;
+    }
+
 }

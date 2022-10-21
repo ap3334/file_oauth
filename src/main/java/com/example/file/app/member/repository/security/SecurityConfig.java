@@ -1,6 +1,6 @@
-package com.example.file.app.security;
+package com.example.file.app.member.repository.security;
 
-import com.example.file.app.security.service.OAuth2UserService;
+import com.example.file.app.member.repository.security.service.OAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

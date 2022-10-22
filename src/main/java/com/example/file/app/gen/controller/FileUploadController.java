@@ -1,4 +1,4 @@
-package com.example.file.app.fileUpload.controller;
+package com.example.file.app.gen.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

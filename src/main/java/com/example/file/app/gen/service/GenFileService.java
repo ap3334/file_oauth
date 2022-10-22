@@ -1,10 +1,10 @@
-package com.example.file.app.fileUpload.service;
+package com.example.file.app.gen.service;
 
 import com.example.file.app.article.entity.Article;
 import com.example.file.app.base.AppConfig;
 import com.example.file.app.base.dto.RsData;
-import com.example.file.app.fileUpload.entity.GenFile;
-import com.example.file.app.fileUpload.repository.GenFileRepository;
+import com.example.file.app.gen.entity.GenFile;
+import com.example.file.app.gen.repository.GenFileRepository;
 import com.example.file.util.Util;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -210,4 +210,9 @@ public class GenFileService {
         deleteFileFromStorage(genFile);
         genFileRepository.delete(genFile);
     }
+
+    public Optional<GenFile> getById(Long id) {
+        return genFileRepository.findById(id);
+    }
+
 }

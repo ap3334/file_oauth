@@ -1,6 +1,6 @@
-package com.example.file.app.fileUpload.repository;
+package com.example.file.app.gen.repository;
 
-import com.example.file.app.fileUpload.entity.GenFile;
+import com.example.file.app.gen.entity.GenFile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

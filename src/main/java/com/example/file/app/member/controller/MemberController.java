@@ -1,8 +1,8 @@
 package com.example.file.app.member.controller;
 
 import com.example.file.app.member.entity.Member;
-import com.example.file.app.member.service.MemberService;
 import com.example.file.app.member.repository.security.dto.MemberContext;
+import com.example.file.app.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;

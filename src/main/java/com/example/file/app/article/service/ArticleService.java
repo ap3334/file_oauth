@@ -66,11 +66,7 @@ public class ArticleService {
     public Article getForPrintArticleById(Long id) {
         Article article = getArticleById(id);
 
-        Map<String, GenFile> genFileMap = genFileService.getRelGenFileMap(article);
-        List<HashTag> hashTags = hashTagService.getHashTags(article);
-
-        article.getExtra().put("hashTags", hashTags);
-        article.getExtra().put("genFileMap", genFileMap);
+        loadForPrintData(article);
 
         return article;
 
@@ -92,6 +88,14 @@ public class ArticleService {
 
     public List<Article> search(String kwType, String kw) {
         return articleRepository.searchQsl(kwType, kw);
+    }
+
+    public void loadForPrintData(Article article) {
+        Map<String, GenFile> genFileMap = genFileService.getRelGenFileMap(article);
+        List<HashTag> hashTags = hashTagService.getHashTags(article);
+
+        article.getExtra().put("hashTags", hashTags);
+        article.getExtra().put("genFileMap", genFileMap);
     }
 
 }

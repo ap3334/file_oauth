@@ -8,4 +8,6 @@ public interface ArticleRepositoryCustom {
 
     List<Article> getQslArticlesOrderByIdDesc();
 
+    List<Article> searchQsl(String kwType, String kw);
+
 }

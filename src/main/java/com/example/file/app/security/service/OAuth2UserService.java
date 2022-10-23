@@ -1,10 +1,10 @@
-package com.example.file.app.member.repository.security.service;
+package com.example.file.app.security.service;
 
 import com.example.file.app.member.entity.Member;
 import com.example.file.app.member.exception.MemberNotFoundException;
 import com.example.file.app.member.repository.MemberRepository;
-import com.example.file.app.member.repository.security.dto.MemberContext;
-import com.example.file.app.member.repository.security.exception.OAuthTypeMatchNotFoundException;
+import com.example.file.app.security.dto.MemberContext;
+import com.example.file.app.security.exception.OAuthTypeMatchNotFoundException;
 import com.example.file.app.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

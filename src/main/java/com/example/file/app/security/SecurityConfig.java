@@ -1,6 +1,6 @@
-package com.example.file.app.member.repository.security;
+package com.example.file.app.security;
 
-import com.example.file.app.member.repository.security.service.OAuth2UserService;
+import com.example.file.app.security.service.OAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -18,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final OAuth2UserService oAuth2UserService;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -37,10 +39,12 @@ public class SecurityConfig {
                 .formLogin(
                         formLogin -> formLogin.loginPage("/member/login")
                                 .loginProcessingUrl("/member/login")
+                                .successHandler(authenticationSuccessHandler)
                 )
                 .oauth2Login(
                         oauth2Login -> oauth2Login
                                 .loginPage("/member/login")
+                                .successHandler(authenticationSuccessHandler)
                                 .userInfoEndpoint(
                                         userInfoEndPoint -> userInfoEndPoint.userService(oAuth2UserService)
                                 )

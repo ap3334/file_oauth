@@ -6,7 +6,7 @@ import com.example.file.app.article.service.ArticleService;
 import com.example.file.app.base.dto.RsData;
 import com.example.file.app.gen.entity.GenFile;
 import com.example.file.app.gen.service.GenFileService;
-import com.example.file.app.member.repository.security.dto.MemberContext;
+import com.example.file.app.security.dto.MemberContext;
 import com.example.file.util.Util;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

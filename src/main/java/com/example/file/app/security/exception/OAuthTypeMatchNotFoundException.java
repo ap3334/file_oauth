@@ -1,4 +1,4 @@
-package com.example.file.app.member.repository.security.exception;
+package com.example.file.app.security.exception;
 
 public class OAuthTypeMatchNotFoundException extends RuntimeException {
 }

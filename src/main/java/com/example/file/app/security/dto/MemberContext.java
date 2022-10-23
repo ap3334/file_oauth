@@ -1,4 +1,4 @@
-package com.example.file.app.member.repository.security.dto;
+package com.example.file.app.security.dto;
 
 import com.example.file.app.member.entity.Member;
 import lombok.Getter;

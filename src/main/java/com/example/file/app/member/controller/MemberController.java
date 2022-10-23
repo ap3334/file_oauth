@@ -1,7 +1,7 @@
 package com.example.file.app.member.controller;
 
 import com.example.file.app.member.entity.Member;
-import com.example.file.app.member.repository.security.dto.MemberContext;
+import com.example.file.app.security.dto.MemberContext;
 import com.example.file.app.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.CacheControl;
@@ -94,7 +94,13 @@ public class MemberController {
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
-    public String showLogin() {
+    public String showLogin(HttpServletRequest request) {
+
+        String uri = request.getHeader("Referer");
+        if (uri != null && !uri.contains("/member/login")) {
+            request.getSession().setAttribute("prevPage", uri);
+        }
+
         return "member/login";
     }
 
@@ -109,7 +115,7 @@ public class MemberController {
     public String modify(@AuthenticationPrincipal MemberContext context, String email, MultipartFile profileImg, String profileImg__delete) {
         Member member = memberService.getMemberById(context.getId());
 
-        if ( profileImg__delete != null && profileImg__delete.equals("Y") ) {
+        if (profileImg__delete != null && profileImg__delete.equals("Y")) {
             memberService.removeProfileImg(member);
         }
 

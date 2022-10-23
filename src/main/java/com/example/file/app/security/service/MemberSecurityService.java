@@ -1,8 +1,8 @@
-package com.example.file.app.member.repository.security.service;
+package com.example.file.app.security.service;
 
 import com.example.file.app.member.entity.Member;
 import com.example.file.app.member.repository.MemberRepository;
-import com.example.file.app.member.repository.security.dto.MemberContext;
+import com.example.file.app.security.dto.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

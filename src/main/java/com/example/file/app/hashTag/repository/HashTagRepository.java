@@ -12,5 +12,7 @@ public interface HashTagRepository extends JpaRepository<HashTag, Long> {
 
     List<HashTag> findAllByArticleId(Long articleId);
 
+    List<HashTag> findAllByArticleIdIn(long[] ids);
+
 }
 
